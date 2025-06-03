@@ -34,6 +34,10 @@ public class WallManager : MonoBehaviour
                 currentWall.gameObject.SetActive(false);
                 currentWall = transform.GetChild(index);
                 currentWall.gameObject.SetActive(true);
+
+                leftHandFinish = false;
+                rightHandFinish = false;
+                headFinish = false;
             }
         }
     }
