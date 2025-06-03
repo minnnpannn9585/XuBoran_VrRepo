@@ -29,7 +29,7 @@ public class WallManager : MonoBehaviour
                 index++;
                 if (index >= transform.childCount)
                 {
-                    index = 0;
+                    index = 1;
                 }
                 currentWall.gameObject.SetActive(false);
                 currentWall = transform.GetChild(index);

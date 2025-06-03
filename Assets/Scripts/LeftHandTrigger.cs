@@ -9,6 +9,10 @@ public class LeftHandTrigger : MonoBehaviour
     {
         wallManager = GameObject.Find("WallManager").GetComponent<WallManager>();
     }
+    private void Update()
+    {
+        wallManager.leftHandFinish = true;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
