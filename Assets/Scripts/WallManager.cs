@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class WallManager : MonoBehaviour
 {
-    int index = 1;
+    int index = 0;
     Transform currentWall;
     public bool leftHandFinish = false;
     public bool rightHandFinish = false;
     public bool headFinish = false;
-    float timer = 10f;
+    float timer = 3f;
 
     // Start is called before the first frame update
     void Start()
@@ -23,13 +23,13 @@ public class WallManager : MonoBehaviour
         timer -= Time.deltaTime;
         if(timer <= 0)
         {
-            timer = 10f;
+            timer = 3f;
             if (leftHandFinish && rightHandFinish && headFinish)
             {
                 index++;
                 if (index >= transform.childCount)
                 {
-                    index = 1;
+                    index = 0;
                 }
                 currentWall.gameObject.SetActive(false);
                 currentWall = transform.GetChild(index);
