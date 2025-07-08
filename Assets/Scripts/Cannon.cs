@@ -7,13 +7,18 @@ public class Cannon : MonoBehaviour
     public GameObject[] fruits;
     public float force;
 
-    private void Update()
+    private void Start()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            ShootFruit();
-        }
+        ShootFruit();
     }
+
+    //private void Update()
+    //{
+    //    if(Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        ShootFruit();
+    //    }
+    //}
 
     public void ShootFruit()
     {
