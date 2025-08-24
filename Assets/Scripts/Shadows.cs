@@ -10,9 +10,9 @@ public class Shadows : MonoBehaviour
 
     public int index;
 
-    float shadowMaxZ = 0.1f;
-    float shadowMinZ = 0.05f;
-    float shadowMaxY = 7f;
+    float shadowMaxZ = 0.2f;
+    float shadowMinZ = -3.5f;
+    float shadowMaxY = 6.7f;
     float shadowMinY = 4.3f;
 
 
@@ -28,23 +28,26 @@ public class Shadows : MonoBehaviour
         
         if (index == 0)
         {
-            transform.position = new Vector3(28.6f, head.position.y, head.position.z);
+            transform.position = new Vector3(28.4f, head.position.y, head.position.z);
 
         }
         if (index == 1)
         {
-            transform.position = new Vector3(28.6f, leftHand.position.y, leftHand.position.z);
+            transform.position = new Vector3(28.4f, leftHand.position.y, leftHand.position.z);
         }
         if (index == 2)
         {
-            transform.position = new Vector3(28.6f, rightHand.position.y, rightHand.position.z);
+            transform.position = new Vector3(28.4f, rightHand.position.y, rightHand.position.z);
         }
 
         if (transform.position.y > shadowMaxY || transform.position.y < shadowMinY)
         {
             transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, shadowMinY, shadowMaxY), transform.position.z);
         }
-        //if
+        if (transform.position.z > shadowMaxZ || transform.position.z < shadowMinZ)
+        {
+            transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.x, shadowMinZ, shadowMaxZ), transform.position.z);
+        }
 
     }
 }

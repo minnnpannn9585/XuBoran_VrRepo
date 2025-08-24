@@ -6,19 +6,21 @@ public class Cannon : MonoBehaviour
 {
     public GameObject[] fruits;
     public float force;
+    public Queue<GameObject> existingFruits;
 
     private void Start()
     {
-        ShootFruit();
+        existingFruits = new Queue<GameObject>();
+        //ShootFruit();
     }
 
-    //private void Update()
-    //{
-    //    if(Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        ShootFruit();
-    //    }
-    //}
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+       {
+           ShootFruit();
+       }
+    }
 
     public void ShootFruit()
     {
@@ -33,6 +35,9 @@ public class Cannon : MonoBehaviour
     public void SpawnFruit()
     {
         GameObject fruit = Instantiate(fruits[Random.Range(0, fruits.Length)], transform.position, Quaternion.identity);
+
         fruit.GetComponent<Rigidbody>().AddForce(transform.right * force, ForceMode.Impulse);
+
+        existingFruits.Enqueue(fruit);
     }
 }

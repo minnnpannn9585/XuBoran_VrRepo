@@ -10,6 +10,8 @@ public class WallManager : MonoBehaviour
     public bool rightHandFinish = false;
     public bool headFinish = false;
     float timer = 3f;
+    public int passedLevels = 0;
+    public Cannon cannon;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +28,21 @@ public class WallManager : MonoBehaviour
             timer = 3f;
             if (leftHandFinish && rightHandFinish && headFinish)
             {
+                passedLevels++;
                 index++;
+
+                if( index >= 5)
+                {
+                    foreach(GameObject fruit in cannon.existingFruits)
+                    {
+                        
+                        Destroy(fruit);
+                    }
+                }
+                if (index >= 4)
+                {
+                    cannon.ShootFruit();
+                }
                 if (index >= transform.childCount)
                 {
                     index = 0;
