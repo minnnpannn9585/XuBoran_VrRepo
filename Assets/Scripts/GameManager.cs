@@ -5,25 +5,37 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Text countdown;
-    public float duration;
-    public Text passedgames;
-    public int passedLevels;
+    public Text totalCountdown;
+    public float gameDuration;
+    public Text levelCountdown;
+    public float levelDuration;
     public WallManager wallManager;
-
 
     void Update()
     {
-        duration -= Time.deltaTime;
-        countdown.text = Mathf.CeilToInt(duration).ToString();
+        gameDuration -= Time.deltaTime;
+        totalCountdown.text = Mathf.CeilToInt(gameDuration).ToString();
 
-        if(duration <= 0)
+        levelDuration -= Time.deltaTime;
+        levelCountdown.text = Mathf.CeilToInt(levelDuration).ToString();
+
+        if (gameDuration <= 0)
         {
-            duration = 0;
-            countdown.text = "0";
+            gameDuration = 0;
+            totalCountdown.text = "0";
             //EndGame();
         }
-        passedLevels = wallManager.passedLevels;
-        passedgames.text = Mathf.CeilToInt(passedLevels).ToString();
+
+        if(levelDuration <= 0)
+        {
+            wallManager.PassThisLevel();
+            //enter next level
+        }
+    }
+
+    public void ResetLevelCountdown()
+    {
+        levelDuration = 10f;
+        levelCountdown.text = "10";
     }
 }

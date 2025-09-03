@@ -12,6 +12,7 @@ public class WallManager : MonoBehaviour
     float timer = 3f;
     public int passedLevels = 0;
     public Cannon cannon;
+    public GameManager gm;
 
     // Start is called before the first frame update
     void Start()
@@ -28,33 +29,39 @@ public class WallManager : MonoBehaviour
             timer = 3f;
             if (leftHandFinish && rightHandFinish && headFinish)
             {
-                passedLevels++;
-                index++;
-
-                if( index >= 5)
-                {
-                    foreach(GameObject fruit in cannon.existingFruits)
-                    {
-                        
-                        Destroy(fruit);
-                    }
-                }
-                if (index >= 4)
-                {
-                    cannon.ShootFruit();
-                }
-                if (index >= transform.childCount)
-                {
-                    index = 0;
-                }
-                currentWall.gameObject.SetActive(false);
-                currentWall = transform.GetChild(index);
-                currentWall.gameObject.SetActive(true);
-
-                leftHandFinish = false;
-                rightHandFinish = false;
-                headFinish = false;
+                PassThisLevel();
             }
         }
+    }
+
+    public void PassThisLevel()
+    {
+        passedLevels++;
+        index++;
+        gm.ResetLevelCountdown();
+
+        if (index >= 5)
+        {
+            foreach (GameObject fruit in cannon.existingFruits)
+            {
+
+                Destroy(fruit);
+            }
+        }
+        if (index >= 4)
+        {
+            cannon.ShootFruit();
+        }
+        if (index >= transform.childCount)
+        {
+            index = 0;
+        }
+        currentWall.gameObject.SetActive(false);
+        currentWall = transform.GetChild(index);
+        currentWall.gameObject.SetActive(true);
+
+        leftHandFinish = false;
+        rightHandFinish = false;
+        headFinish = false;
     }
 }
